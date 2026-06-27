@@ -10,22 +10,24 @@ st.title("🌍 Peta Sebaran Kasus DBD: Nasional")
 st.write("Visualisasi Spasio-Temporal Tingkat Provinsi - Informatika UNAND")
 st.markdown("---")
 
-# --- LOGIKA PATH ANTI-ERROR ---
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
 geo_path = os.path.join(base_path, 'all_kabkota_ind.geojson')
 
+# NAMA FUNGSI DIBEDAKAN AGAR CACHE TIDAK BENTROK
 @st.cache_data
-def load_data():
+def load_data_nasional():
     df = pd.read_csv(csv_path)
     with open(geo_path, 'r') as f:
         geo = json.load(f)
     return df, geo
 
 try:
-    df_indo, geo_indo = load_data()
+    df_indo, geo_indo = load_data_nasional()
     
-    # Cek dinamis nama kolom jumlah kasus
+    # FIX CASE MISMATCH: Jadikan huruf kapital semua agar cocok dengan GeoJSON
+    df_indo['Provinsi'] = df_indo['Provinsi'].str.upper()
+    
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
     
     tahun = st.slider("Pilih Tahun:", int(df_indo['Tahun'].min()), int(df_indo['Tahun'].max()), int(df_indo['Tahun'].max()))

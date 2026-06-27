@@ -10,27 +10,25 @@ st.title("🚨 Deteksi Anomali DBD: 50 Kota")
 st.write("Analisis Spasio-Temporal Tingkat Kecamatan menggunakan Machine Learning")
 st.markdown("---")
 
-# --- LOGIKA PATH ANTI-ERROR ---
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_50kota_anomali.csv')
 geo_path = os.path.join(base_path, 'id1308_lima_puluh_kota.geojson')
 
+# NAMA FUNGSI DIBEDAKAN
 @st.cache_data
-def load_data():
+def load_data_50kota():
     df = pd.read_csv(csv_path)
     with open(geo_path, 'r') as f:
         geo = json.load(f)
     return df, geo
 
 try:
-    df_50kota, geo_50kota = load_data()
+    df_50kota, geo_50kota = load_data_50kota()
     
-    # Cek dinamis nama kolom jumlah kasus
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_50kota.columns else 'Kasus'
     
     tab1, tab2 = st.tabs(["🗺️ Peta Spasial & Anomali", "📈 Tren Temporal"])
     
-    # === TAB 1: PETA SPASIAL ===
     with tab1:
         st.subheader("Peta Sebaran DBD & Titik Anomali")
         tahun = st.slider("Pilih Tahun:", int(df_50kota['Tahun'].min()), int(df_50kota['Tahun'].max()), int(df_50kota['Tahun'].max()))
@@ -46,7 +44,6 @@ try:
             title=f"Sebaran 50 Kota Tahun {tahun}"
         )
         
-        # Highlight Anomali
         df_anomali_year = df_year[df_year['is_anomali'] == True]
         if not df_anomali_year.empty:
             fig_map.add_scattergeo(
@@ -67,7 +64,6 @@ try:
         else:
             st.success("Tidak ada anomali terdeteksi pada tahun ini.")
         
-    # === TAB 2: TREN TEMPORAL ===
     with tab2:
         st.subheader("Tren Kasus Waktu (Temporal)")
         kec_list = sorted(df_50kota['Kecamatan'].unique())

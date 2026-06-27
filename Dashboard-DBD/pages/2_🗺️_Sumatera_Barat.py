@@ -10,22 +10,28 @@ st.title("🗺️ Peta Sebaran Kasus DBD: Sumatera Barat")
 st.write("Visualisasi Spasio-Temporal Tingkat Kabupaten/Kota - Informatika UNAND")
 st.markdown("---")
 
-# --- LOGIKA PATH ANTI-ERROR ---
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_sumbar_clean_long.csv')
 geo_path = os.path.join(base_path, 'all_kabkota_ind.geojson')
 
+# NAMA FUNGSI DIBEDAKAN
 @st.cache_data
-def load_data():
+def load_data_sumbar():
     df = pd.read_csv(csv_path)
     with open(geo_path, 'r') as f:
         geo = json.load(f)
     return df, geo
 
 try:
-    df_sumbar, geo_sumbar = load_data()
+    df_sumbar, geo_sumbar_raw = load_data_sumbar()
     
-    # Cek dinamis nama kolom jumlah kasus
+    # FIX CASE MISMATCH: Jadikan huruf kapital semua
+    df_sumbar['Kab/Kota'] = df_sumbar['Kab/Kota'].str.upper()
+    
+    # TRIK: Filter GeoJSON hanya untuk Sumatera Barat agar peta langsung nge-zoom ke Sumbar!
+    geo_sumbar = geo_sumbar_raw.copy()
+    geo_sumbar['features'] = [f for f in geo_sumbar_raw['features'] if f['properties'].get('prov_name') == 'SUMATERA BARAT']
+    
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_sumbar.columns else 'Kasus'
     
     tahun = st.slider("Pilih Tahun:", int(df_sumbar['Tahun'].min()), int(df_sumbar['Tahun'].max()), int(df_sumbar['Tahun'].max()))
@@ -45,4 +51,3 @@ try:
 
 except Exception as e:
     st.error(f"⚠️ Error: {e}. Gagal membaca data di path: {csv_path} atau {geo_path}")
-    
