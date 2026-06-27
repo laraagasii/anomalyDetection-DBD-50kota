@@ -1,0 +1,157 @@
+Kecamatan,Tahun,Jumlah_Kasus,is_anomali
+Payakumbuh,2013,34,True
+Akabiluru,2013,11,False
+Luak,2013,6,False
+Lareh Sago Halaban,2013,2,False
+Situjuah Limo Nagari,2013,0,False
+Harau,2013,23,False
+Guguak,2013,6,False
+Mungka,2013,16,False
+Suliki,2013,5,False
+Bukik Barisan,2013,5,False
+Gunuang Omeh,2013,3,False
+Kapur IX,2013,2,False
+Pangkalan Koto Baru,2013,3,False
+Payakumbuh,2014,30,True
+Akabiluru,2014,2,False
+Luak,2014,9,False
+Lareh Sago Halaban,2014,8,False
+Situjuah Limo Nagari,2014,1,False
+Harau,2014,4,False
+Guguak,2014,11,False
+Mungka,2014,4,False
+Suliki,2014,11,False
+Bukik Barisan,2014,2,False
+Gunuang Omeh,2014,15,False
+Kapur IX,2014,47,True
+Pangkalan Koto Baru,2014,3,False
+Payakumbuh,2015,71,True
+Akabiluru,2015,9,False
+Luak,2015,12,False
+Lareh Sago Halaban,2015,4,False
+Situjuah Limo Nagari,2015,5,False
+Harau,2015,16,False
+Guguak,2015,29,False
+Mungka,2015,4,False
+Suliki,2015,11,False
+Bukik Barisan,2015,6,False
+Gunuang Omeh,2015,19,False
+Kapur IX,2015,0,False
+Pangkalan Koto Baru,2015,4,False
+Payakumbuh,2016,43,True
+Akabiluru,2016,8,False
+Luak,2016,36,False
+Lareh Sago Halaban,2016,11,False
+Situjuah Limo Nagari,2016,1,False
+Harau,2016,18,False
+Guguak,2016,50,True
+Mungka,2016,10,False
+Suliki,2016,5,False
+Bukik Barisan,2016,5,False
+Gunuang Omeh,2016,19,False
+Kapur IX,2016,18,False
+Pangkalan Koto Baru,2016,6,False
+Payakumbuh,2017,19,False
+Akabiluru,2017,19,False
+Luak,2017,37,True
+Lareh Sago Halaban,2017,8,False
+Situjuah Limo Nagari,2017,10,False
+Harau,2017,26,False
+Guguak,2017,65,True
+Mungka,2017,19,False
+Suliki,2017,18,False
+Bukik Barisan,2017,11,False
+Gunuang Omeh,2017,2,False
+Kapur IX,2017,0,False
+Pangkalan Koto Baru,2017,3,False
+Payakumbuh,2018,16,False
+Akabiluru,2018,1,False
+Luak,2018,16,False
+Lareh Sago Halaban,2018,0,False
+Situjuah Limo Nagari,2018,1,False
+Harau,2018,6,False
+Guguak,2018,5,False
+Mungka,2018,0,False
+Suliki,2018,0,False
+Bukik Barisan,2018,7,False
+Gunuang Omeh,2018,0,False
+Kapur IX,2018,0,False
+Pangkalan Koto Baru,2018,0,False
+Payakumbuh,2019,17,False
+Akabiluru,2019,9,False
+Luak,2019,7,False
+Lareh Sago Halaban,2019,3,False
+Situjuah Limo Nagari,2019,6,False
+Harau,2019,24,False
+Guguak,2019,5,False
+Mungka,2019,1,False
+Suliki,2019,2,False
+Bukik Barisan,2019,0,False
+Gunuang Omeh,2019,2,False
+Kapur IX,2019,0,False
+Pangkalan Koto Baru,2019,5,False
+Payakumbuh,2020,8,False
+Akabiluru,2020,1,False
+Luak,2020,14,False
+Lareh Sago Halaban,2020,0,False
+Situjuah Limo Nagari,2020,0,False
+Harau,2020,15,False
+Guguak,2020,2,False
+Mungka,2020,0,False
+Suliki,2020,0,False
+Bukik Barisan,2020,1,False
+Gunuang Omeh,2020,1,False
+Kapur IX,2020,0,False
+Pangkalan Koto Baru,2020,0,False
+Payakumbuh,2021,3,False
+Akabiluru,2021,1,False
+Luak,2021,7,False
+Lareh Sago Halaban,2021,1,False
+Situjuah Limo Nagari,2021,1,False
+Harau,2021,0,False
+Guguak,2021,0,False
+Mungka,2021,0,False
+Suliki,2021,0,False
+Bukik Barisan,2021,0,False
+Gunuang Omeh,2021,0,False
+Kapur IX,2021,0,False
+Pangkalan Koto Baru,2021,0,False
+Payakumbuh,2022,18,False
+Akabiluru,2022,4,False
+Luak,2022,4,False
+Lareh Sago Halaban,2022,0,False
+Situjuah Limo Nagari,2022,0,False
+Harau,2022,14,False
+Guguak,2022,5,False
+Mungka,2022,3,False
+Suliki,2022,1,False
+Bukik Barisan,2022,1,False
+Gunuang Omeh,2022,1,False
+Kapur IX,2022,0,False
+Pangkalan Koto Baru,2022,5,False
+Payakumbuh,2023,9,False
+Akabiluru,2023,2,False
+Luak,2023,6,False
+Lareh Sago Halaban,2023,0,False
+Situjuah Limo Nagari,2023,0,False
+Harau,2023,6,False
+Guguak,2023,0,False
+Mungka,2023,4,False
+Suliki,2023,1,False
+Bukik Barisan,2023,2,False
+Gunuang Omeh,2023,1,False
+Kapur IX,2023,4,False
+Pangkalan Koto Baru,2023,0,False
+Payakumbuh,2024,19,False
+Akabiluru,2024,0,False
+Luak,2024,11,False
+Lareh Sago Halaban,2024,0,False
+Situjuah Limo Nagari,2024,0,False
+Harau,2024,0,False
+Guguak,2024,6,False
+Mungka,2024,7,False
+Suliki,2024,6,False
+Bukik Barisan,2024,0,False
+Gunuang Omeh,2024,0,False
+Kapur IX,2024,0,False
+Pangkalan Koto Baru,2024,0,False

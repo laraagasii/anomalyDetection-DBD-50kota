@@ -1,0 +1,457 @@
+Provinsi,Tahun,Jumlah_Kasus
+Aceh,2013,1369
+Sumatera Utara,2013,3223
+Sumatera Barat,2013,2206
+Riau,2013,1398
+Jambi,2013,638
+Sumatera Selatan,2013,1436
+Bengkulu,2013,414
+Lampung,2013,4573
+Kepulauan Bangka Belitung,2013,741
+Kepulauan Riau,2013,913
+DKI Jakarta,2013,10156
+Jawa Barat,2013,23118
+Jawa Tengah,2013,15144
+DI Yogyakarta,2013,3319
+Jawa Timur,2013,14895
+Banten,2013,3977
+Bali,2013,6813
+Nusa Tenggara Barat,2013,1703
+Nusa Tenggara Timur,2013,449
+Kalimantan Barat,2013,775
+Kalimantan Tengah,2013,1035
+Kalimantan Selatan,2013,1085
+Kalimantan Timur,2013,3593
+Kalimantan Utara,2013,0
+Sulawesi Utara,2013,1151
+Sulawesi Tengah,2013,1778
+Sulawesi Selatan,2013,4261
+Sulawesi Tenggara,2013,1135
+Gorontalo,2013,238
+Sulawesi Barat,2013,500
+Maluku,2013,33
+Maluku Utara,2013,242
+Papua Barat,2013,48
+Papua Barat Daya,2013,0
+Papua,2013,152
+Papua Selatan,2013,0
+Papua Tengah,2013,0
+Papua Pegunungan,2013,0
+Aceh,2014,2208
+Sumatera Utara,2014,5378
+Sumatera Barat,2014,2328
+Riau,2014,2342
+Jambi,2014,1308
+Sumatera Selatan,2014,1500
+Bengkulu,2014,464
+Lampung,2014,1317
+Kepulauan Bangka Belitung,2014,321
+Kepulauan Riau,2014,1882
+DKI Jakarta,2014,8447
+Jawa Barat,2014,18116
+Jawa Tengah,2014,11075
+DI Yogyakarta,2014,1955
+Jawa Timur,2014,9273
+Banten,2014,3002
+Bali,2014,8629
+Nusa Tenggara Barat,2014,824
+Nusa Tenggara Timur,2014,167
+Kalimantan Barat,2014,5049
+Kalimantan Tengah,2014,880
+Kalimantan Selatan,2014,828
+Kalimantan Timur,2014,4752
+Kalimantan Utara,2014,781
+Sulawesi Utara,2014,1271
+Sulawesi Tengah,2014,1302
+Sulawesi Selatan,2014,2904
+Sulawesi Tenggara,2014,838
+Gorontalo,2014,223
+Sulawesi Barat,2014,315
+Maluku,2014,12
+Maluku Utara,2014,148
+Papua Barat,2014,77
+Papua Barat Daya,2014,0
+Papua,2014,431
+Papua Selatan,2014,0
+Papua Tengah,2014,0
+Papua Pegunungan,2014,0
+Aceh,2015,1509
+Sumatera Utara,2015,5274
+Sumatera Barat,2015,3806
+Riau,2015,3261
+Jambi,2015,1354
+Sumatera Selatan,2015,3396
+Bengkulu,2015,1003
+Lampung,2015,3145
+Kepulauan Bangka Belitung,2015,623
+Kepulauan Riau,2015,1795
+DKI Jakarta,2015,4954
+Jawa Barat,2015,21237
+Jawa Tengah,2015,16398
+DI Yogyakarta,2015,3420
+Jawa Timur,2015,20138
+Banten,2015,3011
+Bali,2015,10704
+Nusa Tenggara Barat,2015,1252
+Nusa Tenggara Timur,2015,506
+Kalimantan Barat,2015,1115
+Kalimantan Tengah,2015,1502
+Kalimantan Selatan,2015,3668
+Kalimantan Timur,2015,6458
+Kalimantan Utara,2015,719
+Sulawesi Utara,2015,730
+Sulawesi Tengah,2015,1571
+Sulawesi Selatan,2015,3974
+Sulawesi Tenggara,2015,1500
+Gorontalo,2015,231
+Sulawesi Barat,2015,486
+Maluku,2015,78
+Maluku Utara,2015,119
+Papua Barat,2015,66
+Papua Barat Daya,2015,0
+Papua,2015,647
+Papua Selatan,2015,0
+Papua Tengah,2015,0
+Papua Pegunungan,2015,0
+Aceh,2016,2651
+Sumatera Utara,2016,8618
+Sumatera Barat,2016,3985
+Riau,2016,4170
+Jambi,2016,1553
+Sumatera Selatan,2016,3851
+Bengkulu,2016,1746
+Lampung,2016,4516
+Kepulauan Bangka Belitung,2016,490
+Kepulauan Riau,2016,1983
+DKI Jakarta,2016,20423
+Jawa Barat,2016,36631
+Jawa Tengah,2016,14376
+DI Yogyakarta,2016,6247
+Jawa Timur,2016,24480
+Banten,2016,6139
+Bali,2016,21668
+Nusa Tenggara Barat,2016,2585
+Nusa Tenggara Timur,2016,1015
+Kalimantan Barat,2016,588
+Kalimantan Tengah,2016,1659
+Kalimantan Selatan,2016,4098
+Kalimantan Timur,2016,10712
+Kalimantan Utara,2016,1055
+Sulawesi Utara,2016,1975
+Sulawesi Tengah,2016,2314
+Sulawesi Selatan,2016,7685
+Sulawesi Tenggara,2016,3444
+Gorontalo,2016,746
+Sulawesi Barat,2016,873
+Maluku,2016,363
+Maluku Utara,2016,297
+Papua Barat,2016,105
+Papua Barat Daya,2016,0
+Papua,2016,1130
+Papua Selatan,2016,0
+Papua Tengah,2016,0
+Papua Pegunungan,2016,0
+Aceh,2017,2591
+Sumatera Utara,2017,5327
+Sumatera Barat,2017,247
+Riau,2017,1928
+Jambi,2017,525
+Sumatera Selatan,2017,1449
+Bengkulu,2017,618
+Lampung,2017,2908
+Kepulauan Bangka Belitung,2017,263
+Kepulauan Riau,2017,832
+DKI Jakarta,2017,335
+Jawa Barat,2017,10016
+Jawa Tengah,2017,74
+DI Yogyakarta,2017,1642
+Jawa Timur,2017,7383
+Banten,2017,136
+Bali,2017,4499
+Nusa Tenggara Barat,2017,1527
+Nusa Tenggara Timur,2017,210
+Kalimantan Barat,2017,2595
+Kalimantan Tengah,2017,879
+Kalimantan Selatan,2017,544
+Kalimantan Timur,2017,2237
+Kalimantan Utara,2017,261
+Sulawesi Utara,2017,581
+Sulawesi Tengah,2017,834
+Sulawesi Selatan,2017,1735
+Sulawesi Tenggara,2017,817
+Gorontalo,2017,504
+Sulawesi Barat,2017,107
+Maluku,2017,91
+Maluku Utara,2017,37
+Papua Barat,2017,163
+Papua Barat Daya,2017,0
+Papua,2017,269
+Papua Selatan,2017,0
+Papua Tengah,2017,0
+Papua Pegunungan,2017,0
+Aceh,2018,1533
+Sumatera Utara,2018,5623
+Sumatera Barat,2018,2203
+Riau,2018,918
+Jambi,2018,720
+Sumatera Selatan,2018,2404
+Bengkulu,2018,1419
+Lampung,2018,2872
+Kepulauan Bangka Belitung,2018,760
+Kepulauan Riau,2018,1204
+DKI Jakarta,2018,2965
+Jawa Barat,2018,8732
+Jawa Tengah,2018,3133
+DI Yogyakarta,2018,547
+Jawa Timur,2018,8449
+Banten,2018,1023
+Bali,2018,904
+Nusa Tenggara Barat,2018,535
+Nusa Tenggara Timur,2018,1333
+Kalimantan Barat,2018,3097
+Kalimantan Tengah,2018,2245
+Kalimantan Selatan,2018,2001
+Kalimantan Timur,2018,3204
+Kalimantan Utara,2018,172
+Sulawesi Utara,2018,1608
+Sulawesi Tengah,2018,1067
+Sulawesi Selatan,2018,2114
+Sulawesi Tenggara,2018,624
+Gorontalo,2018,813
+Sulawesi Barat,2018,532
+Maluku,2018,317
+Maluku Utara,2018,110
+Papua Barat,2018,228
+Papua Barat Daya,2018,0
+Papua,2018,193
+Papua Selatan,2018,0
+Papua Tengah,2018,0
+Papua Pegunungan,2018,0
+Aceh,2019,2386
+Sumatera Utara,2019,7605
+Sumatera Barat,2019,2247
+Riau,2019,4126
+Jambi,2019,2158
+Sumatera Selatan,2019,2799
+Bengkulu,2019,1479
+Lampung,2019,5611
+Kepulauan Bangka Belitung,2019,1012
+Kepulauan Riau,2019,1862
+DKI Jakarta,2019,8705
+Jawa Barat,2019,23485
+Jawa Tengah,2019,9124
+DI Yogyakarta,2019,3301
+Jawa Timur,2019,17912
+Banten,2019,2915
+Bali,2019,4979
+Nusa Tenggara Barat,2019,2971
+Nusa Tenggara Timur,2019,4059
+Kalimantan Barat,2019,2783
+Kalimantan Tengah,2019,1616
+Kalimantan Selatan,2019,2381
+Kalimantan Timur,2019,6723
+Kalimantan Utara,2019,1774
+Sulawesi Utara,2019,2381
+Sulawesi Tengah,2019,1646
+Sulawesi Selatan,2019,3265
+Sulawesi Tenggara,2019,1368
+Gorontalo,2019,1221
+Sulawesi Barat,2019,796
+Maluku,2019,236
+Maluku Utara,2019,1195
+Papua Barat,2019,354
+Papua Barat Daya,2019,0
+Papua,2019,597
+Papua Selatan,2019,0
+Papua Tengah,2019,0
+Papua Pegunungan,2019,0
+Aceh,2020,857
+Sumatera Utara,2020,3143
+Sumatera Barat,2020,1120
+Riau,2020,2640
+Jambi,2020,1971
+Sumatera Selatan,2020,2323
+Bengkulu,2020,1267
+Lampung,2020,6721
+Kepulauan Bangka Belitung,2020,1094
+Kepulauan Riau,2020,1609
+DKI Jakarta,2020,4713
+Jawa Barat,2020,21813
+Jawa Tengah,2020,5939
+DI Yogyakarta,2020,3413
+Jawa Timur,2020,8729
+Banten,2020,2624
+Bali,2020,11775
+Nusa Tenggara Barat,2020,4881
+Nusa Tenggara Timur,2020,5716
+Kalimantan Barat,2020,826
+Kalimantan Tengah,2020,644
+Kalimantan Selatan,2020,1670
+Kalimantan Timur,2020,2277
+Kalimantan Utara,2020,469
+Sulawesi Utara,2020,1262
+Sulawesi Tengah,2020,1144
+Sulawesi Selatan,2020,2752
+Sulawesi Tenggara,2020,858
+Gorontalo,2020,911
+Sulawesi Barat,2020,634
+Maluku,2020,77
+Maluku Utara,2020,425
+Papua Barat,2020,188
+Papua Barat Daya,2020,0
+Papua,2020,215
+Papua Selatan,2020,0
+Papua Tengah,2020,0
+Papua Pegunungan,2020,0
+Aceh,2021,357
+Sumatera Utara,2021,2921
+Sumatera Barat,2021,653
+Riau,2021,950
+Jambi,2021,351
+Sumatera Selatan,2021,1115
+Bengkulu,2021,633
+Lampung,2021,2400
+Kepulauan Bangka Belitung,2021,854
+Kepulauan Riau,2021,1691
+DKI Jakarta,2021,3081
+Jawa Barat,2021,23307
+Jawa Tengah,2021,4712
+DI Yogyakarta,2021,1102
+Jawa Timur,2021,6887
+Banten,2021,1965
+Bali,2021,2599
+Nusa Tenggara Barat,2021,2742
+Nusa Tenggara Timur,2021,2450
+Kalimantan Barat,2021,704
+Kalimantan Tengah,2021,187
+Kalimantan Selatan,2021,168
+Kalimantan Timur,2021,2972
+Kalimantan Utara,2021,169
+Sulawesi Utara,2021,1247
+Sulawesi Tengah,2021,648
+Sulawesi Selatan,2021,3665
+Sulawesi Tenggara,2021,654
+Gorontalo,2021,551
+Sulawesi Barat,2021,349
+Maluku,2021,175
+Maluku Utara,2021,326
+Papua Barat,2021,167
+Papua Barat Daya,2021,0
+Papua,2021,124
+Papua Selatan,2021,0
+Papua Tengah,2021,0
+Papua Pegunungan,2021,0
+Aceh,2022,2034
+Sumatera Utara,2022,8583
+Sumatera Barat,2022,4025
+Riau,2022,2163
+Jambi,2022,1361
+Sumatera Selatan,2022,2803
+Bengkulu,2022,1353
+Lampung,2022,4943
+Kepulauan Bangka Belitung,2022,1869
+Kepulauan Riau,2022,1936
+DKI Jakarta,2022,8083
+Jawa Barat,2022,35644
+Jawa Tengah,2022,13218
+DI Yogyakarta,2022,1998
+Jawa Timur,2022,13523
+Banten,2022,4851
+Bali,2022,5577
+Nusa Tenggara Barat,2022,3323
+Nusa Tenggara Timur,2022,2997
+Kalimantan Barat,2022,1471
+Kalimantan Tengah,2022,883
+Kalimantan Selatan,2022,967
+Kalimantan Timur,2022,6051
+Kalimantan Utara,2022,1306
+Sulawesi Utara,2022,2303
+Sulawesi Tengah,2022,1818
+Sulawesi Selatan,2022,3563
+Sulawesi Tenggara,2022,892
+Gorontalo,2022,577
+Sulawesi Barat,2022,697
+Maluku,2022,100
+Maluku Utara,2022,639
+Papua Barat,2022,332
+Papua Barat Daya,2022,0
+Papua,2022,676
+Papua Selatan,2022,0
+Papua Tengah,2022,0
+Papua Pegunungan,2022,0
+Aceh,2023,2122
+Sumatera Utara,2023,4616
+Sumatera Barat,2023,1907
+Riau,2023,1565
+Jambi,2023,1400
+Sumatera Selatan,2023,1927
+Bengkulu,2023,926
+Lampung,2023,2647
+Kepulauan Bangka Belitung,2023,1248
+Kepulauan Riau,2023,507
+DKI Jakarta,2023,3868
+Jawa Barat,2023,18354
+Jawa Tengah,2023,7091
+DI Yogyakarta,2023,556
+Jawa Timur,2023,9406
+Banten,2023,3920
+Bali,2023,6687
+Nusa Tenggara Barat,2023,3534
+Nusa Tenggara Timur,2023,2057
+Kalimantan Barat,2023,9530
+Kalimantan Tengah,2023,3158
+Kalimantan Selatan,2023,2973
+Kalimantan Timur,2023,5724
+Kalimantan Utara,2023,962
+Sulawesi Utara,2023,2531
+Sulawesi Tengah,2023,1488
+Sulawesi Selatan,2023,2782
+Sulawesi Tenggara,2023,1230
+Gorontalo,2023,665
+Sulawesi Barat,2023,1232
+Maluku,2023,65
+Maluku Utara,2023,823
+Papua Barat,2023,980
+Papua Barat Daya,2023,0
+Papua,2023,94
+Papua Selatan,2023,0
+Papua Tengah,2023,967
+Papua Pegunungan,2023,0
+Aceh,2024,3380
+Sumatera Utara,2024,9478
+Sumatera Barat,2024,2839
+Riau,2024,2911
+Jambi,2024,2306
+Sumatera Selatan,2024,6150
+Bengkulu,2024,3151
+Lampung,2024,9680
+Kepulauan Bangka Belitung,2024,1900
+Kepulauan Riau,2024,1418
+DKI Jakarta,2024,13092
+Jawa Barat,2024,59810
+Jawa Tengah,2024,18867
+DI Yogyakarta,2024,3669
+Jawa Timur,2024,32962
+Banten,2024,12547
+Bali,2024,14933
+Nusa Tenggara Barat,2024,4321
+Nusa Tenggara Timur,2024,3883
+Kalimantan Barat,2024,2701
+Kalimantan Tengah,2024,3990
+Kalimantan Selatan,2024,3090
+Kalimantan Timur,2024,11493
+Kalimantan Utara,2024,627
+Sulawesi Utara,2024,5052
+Sulawesi Tengah,2024,2385
+Sulawesi Selatan,2024,6250
+Sulawesi Tenggara,2024,4749
+Gorontalo,2024,2327
+Sulawesi Barat,2024,2581
+Maluku,2024,417
+Maluku Utara,2024,1120
+Papua Barat,2024,0
+Papua Barat Daya,2024,0
+Papua,2024,1
+Papua Selatan,2024,0
+Papua Tengah,2024,1
+Papua Pegunungan,2024,0
