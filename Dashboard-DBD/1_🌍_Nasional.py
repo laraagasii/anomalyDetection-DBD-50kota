@@ -26,20 +26,21 @@ st.markdown("---")
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
 
-# MENGGUNAKAN FILE JSON PROVINSI BARU
-geo_path = os.path.join(base_path, 'indonesia.geojson')
+# MENGGUNAKAN FILE JSON BARU
+geo_path = os.path.join(base_path, 'indonesia.json')
 
 @st.cache_data
 def load_data_nasional():
     df = pd.read_csv(csv_path)
-    with open(geo_path, 'r') as f:
+    with open(geo_path, 'r', encoding='utf-8') as f:
         geo = json.load(f)
     return df, geo
 
 try:
     df_indo, geo_indo = load_data_nasional()
     
-    # PERBAIKAN 1: Jadikan UPPERCASE agar sama persis dengan format "ACEH" di JSON
+    # Menyamakan format teks ke UPPERCASE (karena mayoritas GeoJSON pakai huruf besar)
+    # Jika JSON baru kamu pakai format Title Case, ganti jadi: df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
     df_indo['Provinsi'] = df_indo['Provinsi'].str.upper()
     
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
@@ -70,8 +71,8 @@ try:
         df_year, 
         geojson=geo_indo, 
         locations='Provinsi', 
-        # PERBAIKAN 2: Sesuaikan dengan key prov_name yang ada di struktur JSON
-        featureidkey="properties.prov_name", 
+        # PERHATIAN KUNCI: Sesuaikan "state" dengan nama field di file indonesia.json kamu
+        featureidkey="properties.state", 
         color=kolom_kasus,
         color_continuous_scale="YlOrRd",
         hover_name='Provinsi',
@@ -88,7 +89,7 @@ try:
         st.plotly_chart(fig, use_container_width=True)
 
 except Exception as e:
-    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia.geojson' sudah diupload.")
+    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia.json' sudah diletakkan di folder yang sama.")
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Proyek Akhir Big Data - Informatika UNAND")
