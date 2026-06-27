@@ -6,97 +6,40 @@ import os
 
 st.set_page_config(page_title="Dashboard DBD Nasional", page_icon="🌍", layout="wide")
 
-# --- 1. HERO SECTION & ONBOARDING ---
 st.title("🌍 Pantau & Deteksi DBD Indonesia")
-st.markdown("""
-Aplikasi **Spatio-Temporal Anomaly Detection** ini memfasilitasi pemantauan sebaran kasus Demam Berdarah Dengue (DBD). 
-Gunakan menu navigasi di sebelah kiri untuk melihat data dari skala Nasional, merayap turun ke Provinsi Sumatera Barat, 
-hingga deteksi anomali di tingkat Kecamatan pada 50 Kota menggunakan *Machine Learning*.
-""")
-
-with st.expander("📖 Panduan Singkat Penggunaan Dashboard (Klik untuk membuka)"):
-    st.markdown("""
-    *   **Tab Nasional:** Memberikan gambaran besar tren kasus DBD per provinsi di Indonesia.
-    *   **Tab Sumatera Barat:** Fokus visualisasi pada distribusi kasus antar Kabupaten/Kota di Sumbar.
-    *   **Tab 50 Kota Anomali:** Merupakan inti dari sistem cerdas ini. Sistem akan menandai kecamatan anomali dengan titik peringatan.
-    """)
+st.markdown("Dashboard monitoring sebaran kasus DBD skala nasional.")
 st.markdown("---")
 
-# --- 2. LOGIKA PATH ANTI-ERROR ---
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
-csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
-geo_path = os.path.join(base_path, 'indonesia.json')
-
-@st.cache_data
-def load_data_nasional():
-    df = pd.read_csv(csv_path)
-    with open(geo_path, 'r', encoding='utf-8') as f:
-        geo = json.load(f)
-    return df, geo
-
 try:
-    df_indo, geo_indo = load_data_nasional()
-    
-    # 1. Ubah jadi Title Case ("Aceh", "Sumatera Barat") sesuai JSON
-    df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
-    
-    # 2. Koreksi nama-nama yang ejaannya beda di JSON
-    koreksi_nama = {
-        'Dki Jakarta': 'Jakarta Raya',
-        'Daerah Istimewa Yogyakarta': 'Yogyakarta',
-        'Di Yogyakarta': 'Yogyakarta',
-        'Bangka Belitung': 'Bangka-Belitung',
-        'Kepulauan Bangka Belitung': 'Bangka-Belitung'
-    }
-    df_indo['Provinsi'] = df_indo['Provinsi'].replace(koreksi_nama)
-    
-    kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
-    
-    # --- 3. FILTER (DROPDOWN) & KPI CARDS ---
-    col_filter, col_empty = st.columns([1, 2])
-    with col_filter:
-        tahun_list = sorted(df_indo['Tahun'].unique(), reverse=True)
-        tahun = st.selectbox("🗓️ Pilih Tahun Pantauan:", tahun_list)
-    
-    df_year = df_indo[df_indo['Tahun'] == tahun]
-    
-    total_kasus = df_year[kolom_kasus].sum()
-    prov_tertinggi = df_year.loc[df_year[kolom_kasus].idxmax()]
-    
-    st.markdown("### 📌 *Quick Insight*")
-    col1, col2, col3 = st.columns(3)
-    col1.metric(label="Total Kasus Nasional", value=f"{total_kasus:,.0f}")
-    col2.metric(label="Provinsi Kasus Tertinggi", value=prov_tertinggi['Provinsi'])
-    col3.metric(label="Jumlah di Provinsi Tertinggi", value=f"{prov_tertinggi[kolom_kasus]:,.0f} Kasus")
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # --- 4. VISUALISASI PETA (MENGGUNAKAN MAPBOX BIAR ANTI-BUG) ---
-    st.subheader(f"Peta Intensitas DBD Tahun {tahun}")
-    
-    fig = px.choropleth_mapbox(
-        df_year, 
-        geojson=geo_indo, 
-        locations='Provinsi', 
-        featureidkey="properties.state", 
-        color=kolom_kasus,
-        color_continuous_scale="YlOrRd",
-        mapbox_style="carto-positron",               # Basemap bersih, ringan, gratisan
-        center={"lat": -0.7893, "lon": 113.9213},    # Langsung nembak koordinat tengah Indonesia
-        zoom=3.8,                                    # Tingkat zoom pas se-Indonesia
-        hover_name='Provinsi',
-        hover_data={kolom_kasus: True, 'Provinsi': False} 
-    )
-    
-    fig.update_layout(
-        margin={"r":0,"t":0,"l":0,"b":0}
-    )
-    
-    with st.container():
+    with st.spinner('Memuat data nasional...'):
+        df = pd.read_csv(os.path.join(base_path, 'dataset_indonesia_clean_long.csv'))
+        with open(os.path.join(base_path, 'indonesia.json'), 'r', encoding='utf-8') as f:
+            geo = json.load(f)
+        
+        df['Provinsi'] = df['Provinsi'].str.title().replace({'Dki Jakarta': 'Jakarta Raya', 'Di Yogyakarta': 'Yogyakarta', 'Bangka Belitung': 'Bangka-Belitung'})
+        
+        # Filter Tahun
+        tahun_list = sorted(df['Tahun'].unique(), reverse=True)
+        tahun = st.sidebar.selectbox("🗓️ Pilih Tahun Pantauan:", tahun_list)
+        df_year = df[df['Tahun'] == tahun]
+        
+        # KPI Metrics
+        total_kasus = df_year['Jumlah_Kasus'].sum()
+        max_prov = df_year.loc[df_year['Jumlah_Kasus'].idxmax()]
+        
+        col1, col2 = st.columns(2)
+        col1.metric("Total Kasus Nasional", f"{total_kasus:,.0f}")
+        col2.metric("Provinsi Tertinggi", max_prov['Provinsi'], f"{max_prov['Jumlah_Kasus']:,.0f} Kasus")
+        
+        # Mapbox
+        fig = px.choropleth_mapbox(df_year, geojson=geo, locations='Provinsi', featureidkey="properties.state", 
+                                   color='Jumlah_Kasus', color_continuous_scale="YlOrRd", mapbox_style="carto-positron",
+                                   center={"lat": -0.7893, "lon": 113.9213}, zoom=3.8, hover_name='Provinsi')
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
         st.plotly_chart(fig, use_container_width=True)
-
+        
+        st.write("### 📊 Data Detail per Provinsi")
+        st.dataframe(df_year[['Provinsi', 'Jumlah_Kasus']], use_container_width=True)
 except Exception as e:
-    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia.json' sudah diletakkan di folder yang sama.")
-
-st.sidebar.markdown("---")
-st.sidebar.caption("Proyek Akhir Big Data - Informatika UNAND")
+    st.error(f"Error: {e}")
