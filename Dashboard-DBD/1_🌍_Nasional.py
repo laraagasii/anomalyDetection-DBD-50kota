@@ -25,8 +25,6 @@ st.markdown("---")
 # --- 2. LOGIKA PATH ANTI-ERROR ---
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
-
-# MENGGUNAKAN FILE JSON BARU
 geo_path = os.path.join(base_path, 'indonesia.json')
 
 @st.cache_data
@@ -39,9 +37,19 @@ def load_data_nasional():
 try:
     df_indo, geo_indo = load_data_nasional()
     
-    # Menyamakan format teks ke UPPERCASE (karena mayoritas GeoJSON pakai huruf besar)
-    # Jika JSON baru kamu pakai format Title Case, ganti jadi: df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
-    df_indo['Provinsi'] = df_indo['Provinsi'].str.upper()
+    # --- PERBAIKAN FATAL: FORMATTING NAMA PROVINSI ---
+    # 1. Ubah jadi Title Case ("Aceh", "Sumatera Barat") sesuai JSON
+    df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
+    
+    # 2. Koreksi nama-nama yang ejaannya beda di JSON
+    koreksi_nama = {
+        'Dki Jakarta': 'Jakarta Raya',
+        'Daerah Istimewa Yogyakarta': 'Yogyakarta',
+        'Di Yogyakarta': 'Yogyakarta',
+        'Bangka Belitung': 'Bangka-Belitung',
+        'Kepulauan Bangka Belitung': 'Bangka-Belitung'
+    }
+    df_indo['Provinsi'] = df_indo['Provinsi'].replace(koreksi_nama)
     
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
     
@@ -71,7 +79,6 @@ try:
         df_year, 
         geojson=geo_indo, 
         locations='Provinsi', 
-        # PERHATIAN KUNCI: Sesuaikan "state" dengan nama field di file indonesia.json kamu
         featureidkey="properties.state", 
         color=kolom_kasus,
         color_continuous_scale="YlOrRd",
