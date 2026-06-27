@@ -37,7 +37,6 @@ def load_data_nasional():
 try:
     df_indo, geo_indo = load_data_nasional()
     
-    # --- PERBAIKAN FATAL: FORMATTING NAMA PROVINSI ---
     # 1. Ubah jadi Title Case ("Aceh", "Sumatera Barat") sesuai JSON
     df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
     
@@ -72,25 +71,26 @@ try:
     
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- 4. VISUALISASI PETA ---
+    # --- 4. VISUALISASI PETA (MENGGUNAKAN MAPBOX BIAR ANTI-BUG) ---
     st.subheader(f"Peta Intensitas DBD Tahun {tahun}")
     
-    fig = px.choropleth(
+    fig = px.choropleth_mapbox(
         df_year, 
         geojson=geo_indo, 
         locations='Provinsi', 
         featureidkey="properties.state", 
         color=kolom_kasus,
         color_continuous_scale="YlOrRd",
+        mapbox_style="carto-positron",               # Basemap bersih, ringan, gratisan
+        center={"lat": -0.7893, "lon": 113.9213},    # Langsung nembak koordinat tengah Indonesia
+        zoom=3.8,                                    # Tingkat zoom pas se-Indonesia
         hover_name='Provinsi',
         hover_data={kolom_kasus: True, 'Provinsi': False} 
     )
     
     fig.update_layout(
-        margin={"r":0,"t":0,"l":0,"b":0},
-        geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular')
+        margin={"r":0,"t":0,"l":0,"b":0}
     )
-    fig.update_geos(fitbounds="locations", visible=False)
     
     with st.container():
         st.plotly_chart(fig, use_container_width=True)
