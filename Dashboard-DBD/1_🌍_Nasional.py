@@ -27,7 +27,7 @@ base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
 
 # MENGGUNAKAN FILE JSON PROVINSI BARU
-geo_path = os.path.join(base_path, 'indonesia_prov.json')
+geo_path = os.path.join(base_path, 'indonesia.geojson')
 
 @st.cache_data
 def load_data_nasional():
@@ -88,7 +88,7 @@ try:
         st.plotly_chart(fig, use_container_width=True)
 
 except Exception as e:
-    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia_prov.json' sudah diupload.")
+    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia.geojson' sudah diupload.")
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Proyek Akhir Big Data - Informatika UNAND")
