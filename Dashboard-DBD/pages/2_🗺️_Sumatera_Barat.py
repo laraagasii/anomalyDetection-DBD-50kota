@@ -6,7 +6,6 @@ import os
 
 st.set_page_config(page_title="DBD Sumatera Barat", page_icon="🗺️", layout="wide")
 
-# --- UI Header ---
 st.title("🗺️ Peta Sebaran Kasus DBD: Sumatera Barat")
 st.markdown("Analisis spasial kasus DBD tingkat Kabupaten/Kota untuk wilayah Sumatera Barat.")
 st.markdown("---")
@@ -22,44 +21,54 @@ def load_data_sumbar():
         geo = json.load(f)
     return df, geo
 
-try:
-    df_sumbar, geo_sumbar_raw = load_data_sumbar()
-    
-    # Preprocessing
-    df_sumbar['Kab/Kota'] = df_sumbar['Kab/Kota'].str.upper()
-    geo_sumbar = geo_sumbar_raw.copy()
-    geo_sumbar['features'] = [f for f in geo_sumbar_raw['features'] if f['properties'].get('prov_name') == 'SUMATERA BARAT']
-    
-    kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_sumbar.columns else 'Kasus'
-    
-    # Sidebar Filter
-    st.sidebar.header("Filter Data")
-    tahun = st.sidebar.slider("Pilih Tahun:", int(df_sumbar['Tahun'].min()), int(df_sumbar['Tahun'].max()), int(df_sumbar['Tahun'].max()))
-    df_year = df_sumbar[df_sumbar['Tahun'] == tahun]
-    
-    # KPI Metric Row
-    col1, col2 = st.columns(2)
-    max_row = df_year.loc[df_year[kolom_kasus].idxmax()]
-    col1.metric("Total Kasus Sumbar", f"{df_year[kolom_kasus].sum():,.0f}")
-    col2.metric("Tertinggi di", max_row['Kab/Kota'], f"{max_row[kolom_kasus]:,.0f} Kasus")
+# --- ANIMASI LOADING (ST.SPINNER) ---
+with st.spinner('Menyiapkan data spasial yang akurat... Tunggu sebentar ya!'):
+    try:
+        df_sumbar, geo_sumbar_raw = load_data_sumbar()
+        
+        # Preprocessing & Normalisasi Nama (KUNCI AGAR DATA MUNCUL SEMUA)
+        df_sumbar['Kab/Kota'] = df_sumbar['Kab/Kota'].str.upper()
+        
+        # GANTI NAMA DI BAWAH INI SESUAI HASIL PRINT JIKA MASIH ADA YANG BOLONG
+        replace_dict = {
+            'KAB. PADANG PARIAMAN': 'PADANG PARIAMAN',
+            'KOTA PADANG': 'PADANG'
+            # Tambahkan mapping lain di sini jika masih ada yang tidak muncul
+        }
+        df_sumbar['Kab/Kota'] = df_sumbar['Kab/Kota'].replace(replace_dict)
+        
+        geo_sumbar = geo_sumbar_raw.copy()
+        geo_sumbar['features'] = [f for f in geo_sumbar_raw['features'] if f['properties'].get('prov_name') == 'SUMATERA BARAT']
+        
+        kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_sumbar.columns else 'Kasus'
+        
+        # Sidebar Filter
+        tahun = st.sidebar.selectbox("🗓️ Pilih Tahun:", sorted(df_sumbar['Tahun'].unique(), reverse=True))
+        df_year = df_sumbar[df_sumbar['Tahun'] == tahun]
+        
+        # KPI Cards
+        col1, col2 = st.columns(2)
+        if not df_year.empty:
+            max_row = df_year.loc[df_year[kolom_kasus].idxmax()]
+            col1.metric("Total Kasus Sumbar", f"{df_year[kolom_kasus].sum():,.0f}")
+            col2.metric("Tertinggi di", max_row['Kab/Kota'], f"{max_row[kolom_kasus]:,.0f} Kasus")
 
-    # --- Peta Mapbox (Lebih Pro) ---
-    fig = px.choropleth_mapbox(
-        df_year, 
-        geojson=geo_sumbar, 
-        locations='Kab/Kota', 
-        featureidkey="properties.name", 
-        color=kolom_kasus,
-        color_continuous_scale="Reds", # Warna merah lebih terasa 'urgensi' DBD
-        mapbox_style="carto-positron",
-        center={"lat": -0.7399, "lon": 100.8000}, # Koordinat tengah Sumbar
-        zoom=6.5,
-        hover_name='Kab/Kota',
-        hover_data={kolom_kasus: True, 'Kab/Kota': False}
-    )
-    
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    st.plotly_chart(fig, use_container_width=True)
+        # Peta Mapbox
+        fig = px.choropleth_mapbox(
+            df_year, 
+            geojson=geo_sumbar, 
+            locations='Kab/Kota', 
+            featureidkey="properties.name", 
+            color=kolom_kasus,
+            color_continuous_scale="Reds",
+            mapbox_style="carto-positron",
+            center={"lat": -0.7399, "lon": 100.8000},
+            zoom=6.8,
+            hover_name='Kab/Kota',
+            hover_data={kolom_kasus: True, 'Kab/Kota': False}
+        )
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+        st.plotly_chart(fig, use_container_width=True)
 
-except Exception as e:
-    st.error(f"⚠️ Terjadi kesalahan: {e}")
+    except Exception as e:
+        st.error(f"⚠️ Terjadi kesalahan: {e}")
