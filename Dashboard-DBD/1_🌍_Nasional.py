@@ -38,6 +38,10 @@ def load_data_nasional():
 
 try:
     df_indo, geo_indo = load_data_nasional()
+
+    
+    # Tambahin baris ini sementara buat ngintip struktur JSON-nya
+    st.write("Melihat struktur JSON:", geo_indo['features'][0]['properties'])
     
     # Menyamakan format teks ke Title Case ("Sumatera Barat") sesuai JSON
     df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
