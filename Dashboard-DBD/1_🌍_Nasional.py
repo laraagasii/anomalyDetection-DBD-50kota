@@ -18,14 +18,16 @@ with st.expander("📖 Panduan Singkat Penggunaan Dashboard (Klik untuk membuka)
     st.markdown("""
     *   **Tab Nasional:** Memberikan gambaran besar tren kasus DBD per provinsi di Indonesia.
     *   **Tab Sumatera Barat:** Fokus visualisasi pada distribusi kasus antar Kabupaten/Kota di Sumbar.
-    *   **Tab 50 Kota Anomali:** Merupakan inti dari sistem cerdas ini. Sistem akan menandai kecamatan mana saja yang mengalami jumlah kasus di luar kebiasaan (anomali) dengan **titik peringatan merah/biru**.
+    *   **Tab 50 Kota Anomali:** Merupakan inti dari sistem cerdas ini. Sistem akan menandai kecamatan mana saja yang mengalami jumlah kasus di luar kebiasaan (anomali) dengan **titik peringatan**.
     """)
 st.markdown("---")
 
 # --- 2. LOGIKA PATH ANTI-ERROR ---
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
-geo_path = os.path.join(base_path, 'all_kabkota_ind.geojson')
+
+# PASTIKAN KAMU SUDAH MENGUPLOAD FILE GEOJSON PROVINSI INI KE GITHUB
+geo_path = os.path.join(base_path, 'indonesia_prov.json')
 
 @st.cache_data
 def load_data_nasional():
@@ -36,14 +38,17 @@ def load_data_nasional():
 
 try:
     df_indo, geo_indo = load_data_nasional()
+    
+    # Menyamakan format teks agar cocok dengan GeoJSON
     df_indo['Provinsi'] = df_indo['Provinsi'].str.upper()
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
     
-    # --- 3. FILTER & KPI CARDS (METRICS) ---
-    # Taruh slider di dalam kolom agar layout lebih proporsional
+    # --- 3. FILTER (DROPDOWN) & KPI CARDS ---
     col_filter, col_empty = st.columns([1, 2])
     with col_filter:
-        tahun = st.slider("🗓️ Pilih Tahun Pantauan:", int(df_indo['Tahun'].min()), int(df_indo['Tahun'].max()), int(df_indo['Tahun'].max()))
+        # Mengubah Slider menjadi Dropdown (Selectbox) diurutkan dari tahun terbaru
+        tahun_list = sorted(df_indo['Tahun'].unique(), reverse=True)
+        tahun = st.selectbox("🗓️ Pilih Tahun Pantauan:", tahun_list)
     
     df_year = df_indo[df_indo['Tahun'] == tahun]
     
@@ -57,35 +62,35 @@ try:
     col2.metric(label="Provinsi Kasus Tertinggi", value=prov_tertinggi['Provinsi'])
     col3.metric(label="Jumlah di Provinsi Tertinggi", value=f"{prov_tertinggi[kolom_kasus]:,.0f} Kasus")
     
-    st.markdown("<br>", unsafe_allow_html=True) # Spasi kosong
+    st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- 4. VISUALISASI PETA YANG DIPERBAIKI ---
+    # --- 4. VISUALISASI PETA ---
     st.subheader(f"Peta Intensitas DBD Tahun {tahun}")
     
     fig = px.choropleth(
         df_year, 
         geojson=geo_indo, 
         locations='Provinsi', 
-        featureidkey="properties.prov_name", 
+        # UBAH VALUE INI SESUAI DENGAN ISI FILE GEOJSON PROVINSI KAMU
+        # Bisa jadi "properties.Propinsi", "properties.state", atau "properties.name"
+        featureidkey="properties.Propinsi", 
         color=kolom_kasus,
         color_continuous_scale="YlOrRd",
         hover_name='Provinsi',
-        hover_data={kolom_kasus: True, 'Provinsi': False} # Tooltip lebih rapi
+        hover_data={kolom_kasus: True, 'Provinsi': False} 
     )
     
-    # Mempercantik layout peta
     fig.update_layout(
         margin={"r":0,"t":0,"l":0,"b":0},
         geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular')
     )
     fig.update_geos(fitbounds="locations", visible=False)
     
-    # Bungkus dalam container agar lebih menonjol
     with st.container():
         st.plotly_chart(fig, use_container_width=True)
 
 except Exception as e:
-    st.error(f"⚠️ Error: {e}. Gagal membaca data di path: {csv_path} atau {geo_path}")
+    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia_prov.geojson' sudah diupload dan featureidkey-nya benar.")
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Proyek Akhir Big Data - Informatika UNAND")
