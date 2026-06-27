@@ -38,15 +38,9 @@ def load_data_nasional():
 
 try:
     df_indo, geo_indo = load_data_nasional()
-
     
-    # Tambahin baris ini sementara buat ngintip struktur JSON-nya
-    st.write("Melihat struktur JSON:", geo_indo['features'][0]['properties'])
-    
-    # Menyamakan format teks ke Title Case ("Sumatera Barat") sesuai JSON
-    df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
-    # Pengecualian untuk DKI Jakarta karena singkatan
-    df_indo['Provinsi'] = df_indo['Provinsi'].replace('Dki Jakarta', 'DKI Jakarta')
+    # PERBAIKAN 1: Jadikan UPPERCASE agar sama persis dengan format "ACEH" di JSON
+    df_indo['Provinsi'] = df_indo['Provinsi'].str.upper()
     
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
     
@@ -76,8 +70,8 @@ try:
         df_year, 
         geojson=geo_indo, 
         locations='Provinsi', 
-        # INI KUNCI UTAMANYA: Mengambil data dari key "PROVINSI" di JSON kamu[cite: 4]
-        featureidkey="properties.PROVINSI", 
+        # PERBAIKAN 2: Sesuaikan dengan key prov_name yang ada di struktur JSON
+        featureidkey="properties.prov_name", 
         color=kolom_kasus,
         color_continuous_scale="YlOrRd",
         hover_name='Provinsi',
