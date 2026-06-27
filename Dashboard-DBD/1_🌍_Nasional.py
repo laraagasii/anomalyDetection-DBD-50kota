@@ -11,14 +11,14 @@ st.title("🌍 Pantau & Deteksi DBD Indonesia")
 st.markdown("""
 Aplikasi **Spatio-Temporal Anomaly Detection** ini memfasilitasi pemantauan sebaran kasus Demam Berdarah Dengue (DBD). 
 Gunakan menu navigasi di sebelah kiri untuk melihat data dari skala Nasional, merayap turun ke Provinsi Sumatera Barat, 
-hingga deteksi anomali (lonjakan kasus tak wajar) di tingkat Kecamatan pada 50 Kota menggunakan *Machine Learning*.
+hingga deteksi anomali di tingkat Kecamatan pada 50 Kota menggunakan *Machine Learning*.
 """)
 
 with st.expander("📖 Panduan Singkat Penggunaan Dashboard (Klik untuk membuka)"):
     st.markdown("""
     *   **Tab Nasional:** Memberikan gambaran besar tren kasus DBD per provinsi di Indonesia.
     *   **Tab Sumatera Barat:** Fokus visualisasi pada distribusi kasus antar Kabupaten/Kota di Sumbar.
-    *   **Tab 50 Kota Anomali:** Merupakan inti dari sistem cerdas ini. Sistem akan menandai kecamatan mana saja yang mengalami jumlah kasus di luar kebiasaan (anomali) dengan **titik peringatan**.
+    *   **Tab 50 Kota Anomali:** Merupakan inti dari sistem cerdas ini. Sistem akan menandai kecamatan anomali dengan titik peringatan.
     """)
 st.markdown("---")
 
@@ -26,7 +26,7 @@ st.markdown("---")
 base_path = 'Dashboard-DBD' if os.path.exists('Dashboard-DBD') else '.'
 csv_path = os.path.join(base_path, 'dataset_indonesia_clean_long.csv')
 
-# PASTIKAN KAMU SUDAH MENGUPLOAD FILE GEOJSON PROVINSI INI KE GITHUB
+# MENGGUNAKAN FILE JSON PROVINSI BARU
 geo_path = os.path.join(base_path, 'indonesia_prov.json')
 
 @st.cache_data
@@ -39,20 +39,21 @@ def load_data_nasional():
 try:
     df_indo, geo_indo = load_data_nasional()
     
-    # Menyamakan format teks agar cocok dengan GeoJSON
-    df_indo['Provinsi'] = df_indo['Provinsi'].str.upper()
+    # Menyamakan format teks ke Title Case ("Sumatera Barat") sesuai JSON
+    df_indo['Provinsi'] = df_indo['Provinsi'].str.title()
+    # Pengecualian untuk DKI Jakarta karena singkatan
+    df_indo['Provinsi'] = df_indo['Provinsi'].replace('Dki Jakarta', 'DKI Jakarta')
+    
     kolom_kasus = 'Jumlah_Kasus' if 'Jumlah_Kasus' in df_indo.columns else 'Kasus'
     
     # --- 3. FILTER (DROPDOWN) & KPI CARDS ---
     col_filter, col_empty = st.columns([1, 2])
     with col_filter:
-        # Mengubah Slider menjadi Dropdown (Selectbox) diurutkan dari tahun terbaru
         tahun_list = sorted(df_indo['Tahun'].unique(), reverse=True)
         tahun = st.selectbox("🗓️ Pilih Tahun Pantauan:", tahun_list)
     
     df_year = df_indo[df_indo['Tahun'] == tahun]
     
-    # Menghitung Insight Cepat
     total_kasus = df_year[kolom_kasus].sum()
     prov_tertinggi = df_year.loc[df_year[kolom_kasus].idxmax()]
     
@@ -71,9 +72,8 @@ try:
         df_year, 
         geojson=geo_indo, 
         locations='Provinsi', 
-        # UBAH VALUE INI SESUAI DENGAN ISI FILE GEOJSON PROVINSI KAMU
-        # Bisa jadi "properties.Propinsi", "properties.state", atau "properties.name"
-        featureidkey="properties.Propinsi", 
+        # INI KUNCI UTAMANYA: Mengambil data dari key "PROVINSI" di JSON kamu[cite: 4]
+        featureidkey="properties.PROVINSI", 
         color=kolom_kasus,
         color_continuous_scale="YlOrRd",
         hover_name='Provinsi',
@@ -90,7 +90,7 @@ try:
         st.plotly_chart(fig, use_container_width=True)
 
 except Exception as e:
-    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia_prov.geojson' sudah diupload dan featureidkey-nya benar.")
+    st.error(f"⚠️ Error: {e}. Pastikan file 'indonesia_prov.json' sudah diupload.")
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Proyek Akhir Big Data - Informatika UNAND")
